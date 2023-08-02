@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Borel&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <title>Document</title>
 </head>
 <style>
     a{
         text-decoration: none;
-        color: black;
+        color: red;
+        font-family: 'Borel', cursive;
     }
     body{
         position: relative;
@@ -22,7 +27,7 @@
     @media (min-width: 400px) and (max-width: 571px){
         .video-preview{
             width: 100%;
-            height: 230px;
+            height: 300px;
         }
     }
     @media (min-width: 572px) and (max-width: 798px){
@@ -34,20 +39,33 @@
     @media (min-width: 799px) and (max-width: 900px){
         .video-preview{
             width: 100%;
-            height: 450px;
+            height: 400px;
         }
     }
+    @media (min-width: 901px) and (max-width: 991px){
+        .video-preview{
+            width: 100%;
+            height: 400px;
+        }
+    }
+    .select{
+        user-select: none;
+    }
+    
 </style>
-<body style="background: lime;">
+<body style="background: lime;" oncopy="return false" class="select">
     <div class="mt-4 container">
         <div class="row justify-content-center">
-            <div class="col-lg-5">
+            <div class="col-md-6">
                 <div id="content">
                     <div class="me-3 card p-4" style="width: auto">
                         <div id="video-preview"></div>
                         <div class="card-body">
-                            <input class="form-control" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="width: 250px;">
+                            <input class="form-control" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="width: auto;">
+                            <!-- <button id="sumbit" class="btn"><i class="bi bi-arrow-return-left"></i></button>
+                            <button class="btn btn-close" id="btnclear"></button> -->
                             <button class="mt-3 btn btn-primary" id="qrcode">Download QR Code</button>
+                            <button class="mt-3 mx-2 btn btn-danger" id="clear">Clear</button>
                             <br>
                             <img src="" class="mt-3 img-thumbnail" id="img">
                             <!-- <button id="btn" class="btn btn-secondary">Download File</button> -->
@@ -58,7 +76,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="mt-3">
+                <div class="mt-3 mx-3">
                     <button type="button" class="btn btn-primary" id="toast1" onclick="myscreenshot()">Screenshot</button>
                 </div>
                 <div class="toast-container position-fixed top-0 end-0 p-3" style="width: auto;">
@@ -95,12 +113,13 @@
     const input = document.getElementById("input");
     const button = document.getElementById("qrcode");
     const img = document.getElementById("img");
+    const btnclear = document.getElementById("clear");
 
     input.addEventListener("keyup", function(event) {
         var id = this.value.replace(/.*\?v=|&.*$/g, '');
             if(id){
                 video.innerHTML = '<iframe class="video-preview" src="https://www.youtube.com/embed/'+id+'" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>';
-                console.log("https://youtu.be/"+id+"");
+                // console.log("https://youtu.be/"+id+"");
                 document.getElementById("result").innerHTML = `<a href="https://youtu.be/${id}" target="_blank">https://youtu.be/${id}</a>`;
             }
             else{
@@ -114,7 +133,12 @@
     const toastlive2 = document.getElementById("tampiltoast2");
     button.addEventListener("click", async()=>{
         if(input.value!=""){
-            const response = await fetch("https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=https://youtu.be/"+input.value);
+            Swal.fire({
+                title:"Berhasil!",
+                icon:"success",
+                text:"Silahkan lihat di perangkat kalian"
+            })
+            const response = await fetch("https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://youtu.be/"+input.value);
             const blob = await response.blob();
             const downloadlink = document.createElement("a");
             downloadlink.href = URL.createObjectURL(blob);
@@ -122,12 +146,29 @@
             downloadlink.click();
         }
         else{
-            if(button){
-                const boostraptoast = bootstrap.Toast.getOrCreateInstance(toastlive2);
-                boostraptoast.show();
-            }
+            Swal.fire({
+                title:"Info",
+                text:"Gagal Untuk Mendownload Dikarenakan Kolom Kosong",
+                icon:"info"
+            })
         }
     });
+
+    btnclear.addEventListener("click", function() {
+        if(input.value!=""){
+            input.value = "";
+            video.innerHTML = "";
+            document.getElementById("result").innerHTML = "";
+        }
+        else{
+            Swal.fire({
+                title: 'Info',
+                text: 'Masih Kosong',
+                icon: 'info',
+                confirmButtonText: 'Oke'
+            })
+        }
+    })
 </script>
 <script>
     function myscreenshot(){
@@ -145,13 +186,15 @@
             });
         }
         else{
-            if(toasttrigger){
-                const boostraptoast = bootstrap.Toast.getOrCreateInstance(toastlive);
-                boostraptoast.show();
-            }
+            Swal.fire({
+                title:"Info",
+                icon:"warning",
+                text:"Error Untuk Screenshot Dikarenakan kolom kosong"
+            })
         }
     }
 </script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
