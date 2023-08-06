@@ -6,19 +6,23 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Borel&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
-    <title>Document</title>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet"> -->
+    <!-- Icon -->
+    <link rel="shortcut icon" href="img/data-collection.png" type="image/x-icon">
+    <!-- Animate -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <title>Youtube Plugin</title>
 </head>
 <style>
     a{
         text-decoration: none;
         color: red;
-        font-family: 'Borel', cursive;
+        font-family: 'Satisfy', cursive;
     }
     body{
         position: relative;
-        top: 100px;
     }
     .video-preview{
         width: 400px;
@@ -53,21 +57,51 @@
     }
     
 </style>
-<body style="background: lime;" oncopy="return false" class="select">
+<body style="background-color: var(--bs-primary-border-subtle);" oncopy="return false" class="select">
+    <nav class="navbar navbar-expand-lg" style="background-color: var(--bs-primary-border-subtle); color: var(--bs-emphasis-color);">
+        <div class="container">
+            <ul class="nav justify-content-center ms-auto">
+                <li class=" nav-item dropdown">
+                    <button class="btn nav-link dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                    data-bs-reference="parent">
+                        <i class="bi bi-sun-fill theme-icon-active" data-theme-icon-active="bi-sun-fill"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-end">
+                        <li><button class="dropdown-item d-flex align-items-center" type="button"
+                                data-bs-theme-value="light">
+                                <i class="bi bi-sun-fill me-1 opacity-50" data-theme-icon="bi-sun-fill"></i>
+                                Light
+                            </button>
+                        </li>
+                        <li><button class="dropdown-item d-flex align-items-center" type="button"
+                                data-bs-theme-value="dark">
+                                <i class="bi bi-moon-fill me-1 opacity-50" data-theme-icon="bi-moon-fill"></i>
+                                Dark
+                            </button></li>
+                        <li><button class="dropdown-item d-flex align-items-center" type="button"
+                                data-bs-theme-value="auto">
+                                <i class="bi bi-circle-half me-1 opacity-50" data-theme-icon="bi-circle-half"></i>
+                                Auto
+                            </button></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="mt-4 container">
         <div class="row justify-content-center">
             <div class="col-md-6">
                 <div id="content">
-                    <div class="me-3 card p-4" style="width: auto">
+                    <div class="me-3 card p-4" style="width: auto; background-color: var(--bs-primary-bg-subtle);">
                         <div id="video-preview"></div>
                         <div class="card-body">
-                            <input class="form-control" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="width: auto;">
+                            <input class="form-control" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="width: 250px; background-color: var(--bs-primary-border-subtle)">
                             <!-- <button id="sumbit" class="btn"><i class="bi bi-arrow-return-left"></i></button>
                             <button class="btn btn-close" id="btnclear"></button> -->
                             <button class="mt-3 btn btn-primary" id="qrcode">Download QR Code</button>
-                            <button class="mt-3 mx-2 btn btn-danger" id="clear">Clear</button>
+                            <button class="mt-3 mx-2 btn btn-primary" id="clear">Clear</button>
                             <br>
-                            <img src="" class="mt-3 img-thumbnail" id="img">
+                            <!-- <img src="" class="mt-3 img-thumbnail" id="img"> -->
                             <!-- <button id="btn" class="btn btn-secondary">Download File</button> -->
                         </div>
                         <div class="mx-2">
@@ -79,35 +113,11 @@
                 <div class="mt-3 mx-3">
                     <button type="button" class="btn btn-primary" id="toast1" onclick="myscreenshot()">Screenshot</button>
                 </div>
-                <div class="toast-container position-fixed top-0 end-0 p-3" style="width: auto;">
-                    <div id="tampiltoast" class="toast bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header">
-                            <strong class="me-auto">Info</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            <p class="fs-4" style="text-transform: capitalize;">Error Untuk Screenshot Dikarenakan kolom kosong</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="toast-container position-fixed top-0 end-0 p-3" style="width: auto;">
-                    <div id="tampiltoast2" class="toast bg-primary" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="toast-header text-bg-info">
-                            <strong class="me-auto">Info</strong>
-                            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                        </div>
-                        <div class="toast-body">
-                            <p class="fs-4">Gagal Untuk Mendownload Dikarenakan Kolom Kosong</p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </body>
-<script>
-    
-</script>
+<script src="dark-mode.js"></script>
 <script>
     const video = document.getElementById("video-preview");
     const input = document.getElementById("input");
@@ -133,22 +143,24 @@
     const toastlive2 = document.getElementById("tampiltoast2");
     button.addEventListener("click", async()=>{
         if(input.value!=""){
-            Swal.fire({
-                title:"Berhasil!",
-                icon:"success",
-                text:"Silahkan lihat di perangkat kalian"
-            })
             const response = await fetch("https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=https://youtu.be/"+input.value);
             const blob = await response.blob();
             const downloadlink = document.createElement("a");
             downloadlink.href = URL.createObjectURL(blob);
             downloadlink.download = "qrcode ("+input.value+").jpg";
             downloadlink.click();
+            Swal.fire({
+                title:"<p align='center'>Berhasil!</p>",
+                icon:"success",
+                html:"Silahkan lihat di perangkat kalian",
+                confirmButtonText:"OKE"
+            })
         }
         else{
             Swal.fire({
                 title:"Info",
                 text:"Gagal Untuk Mendownload Dikarenakan Kolom Kosong",
+                confirmButtonText:"OKE",
                 icon:"info"
             })
         }
@@ -165,7 +177,7 @@
                 title: 'Info',
                 text: 'Masih Kosong',
                 icon: 'info',
-                confirmButtonText: 'Oke'
+                confirmButtonText: 'OKE'
             })
         }
     })
@@ -188,8 +200,10 @@
         else{
             Swal.fire({
                 title:"Info",
-                icon:"warning",
-                text:"Error Untuk Screenshot Dikarenakan kolom kosong"
+                icon:"info",
+                iconColor:"#16f230",
+                confirmButtonText:"Oke",
+                html:"<u class='fs-3'>Error Untuk Screenshot Dikarenakan kolom kosong</u>"
             })
         }
     }
@@ -197,7 +211,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 </html>
