@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="img/data-collection.png" type="image/x-icon">
     <!-- Animate -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
-    <title>Youtube Plugin</title>
+    <title>Youtube Plugin Input</title>
 </head>
 <style>
     a{
@@ -25,8 +25,8 @@
         position: relative;
     }
     .video-preview{
-        width: 400px;
-        height: 250px;
+        width: 470px;
+        height: 300px;
     }
     @media (min-width: 400px) and (max-width: 571px){
         .video-preview{
@@ -52,12 +52,9 @@
             height: 400px;
         }
     }
-    .select{
-        user-select: none;
-    }
     
 </style>
-<body style="background-color: var(--bs-primary-border-subtle);" oncopy="return false" class="select">
+<body style="background-color: var(--bs-primary-border-subtle);">
     <nav class="navbar navbar-expand-lg" style="background-color: var(--bs-primary-border-subtle); color: var(--bs-emphasis-color);">
         <div class="container">
             <ul class="nav justify-content-center ms-auto">
@@ -90,9 +87,10 @@
     </nav>
     <div class="mt-4 container">
         <div class="row justify-content-center">
-            <div class="col-md-6">
+            <div class="col-lg-7">
                 <div id="content">
                     <div class="me-3 card p-4" style="width: auto; background-color: var(--bs-primary-bg-subtle);">
+                        <h1>Youtube Plugin Inputan</h1>
                         <div id="video-preview"></div>
                         <div class="card-body">
                             <input class="form-control" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="width: 250px; background-color: var(--bs-primary-border-subtle)">
@@ -106,13 +104,15 @@
                         </div>
                         <div class="mx-2">
                             <p>Jika Tidak Muncul Klik Di Bawah</p>
-                            <div id="result"></div>
+                            <p class="fw-bold">Link: <span class="fw-light" id="result"></span></p>
                         </div>
                     </div>
                 </div>
                 <div class="mt-3 mx-3">
                     <button type="button" class="btn btn-primary" id="toast1" onclick="myscreenshot()">Screenshot</button>
+                    <a href="File/Cara Menggunakan Website Plugin Youtube Inputan.pdf" class="btn btn-primary" target="_blank">Bantuan</a>
                 </div>
+                <!-- <iframe src="file/Cara Menggunakan Website Plugin Youtube Inputan.docx" width="300" height="400"></iframe> -->
             </div>
         </div>
     </div>
@@ -159,6 +159,7 @@
         else{
             Swal.fire({
                 title:"Info",
+                iconColor:"#f70202",
                 text:"Gagal Untuk Mendownload Dikarenakan Kolom Kosong",
                 confirmButtonText:"OKE",
                 icon:"info"
@@ -189,6 +190,11 @@
         const toasttrigger = document.getElementById("toast1");
         const toastlive = document.getElementById("tampiltoast");
         if(input != ""){
+            Swal.fire({
+                title:"Berhasil",
+                icon:"success",
+                text:"Berhasil terdownload, silakan lihat di folder kalian"
+            })
             html2canvas(elemen).then(function(canvas){
                 var gambar = canvas.toDataURL();
                 var a = document.createElement("a");
@@ -201,17 +207,16 @@
             Swal.fire({
                 title:"Info",
                 icon:"info",
-                iconColor:"#16f230",
+                iconColor:"#f70202",
                 confirmButtonText:"Oke",
-                html:"<u class='fs-3'>Error Untuk Screenshot Dikarenakan kolom kosong</u>"
+                html:"<p class='text-black'>Error Untuk Screenshot Dikarenakan tidak terjadi apa-apa</p>"
             })
         }
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js" integrity="sha384-fbbOQedDUMZZ5KreZpsbe1LCZPVmfTnH7ois6mU1QK+m14rQ1l2bGBq41eYeM/fS" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
 <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 </html>
