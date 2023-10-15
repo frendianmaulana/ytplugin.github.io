@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
     <!-- <link href="https://cdn.jsdelivr.net/npm/@sweetalert2/theme-bulma/bulma.css" rel="stylesheet"> -->
     <!-- Icon -->
@@ -19,19 +20,25 @@
     a{
         text-decoration: none;
         color: red;
-        font-family: 'Satisfy', cursive;
+        font-family: 'Courgette', cursive;
     }
     body{
         position: relative;
     }
     .video-preview{
-        width: 470px;
-        height: 300px;
+        width: 100%;
+        height: 400px;
+    }
+    .input{
+        width: 100%;
     }
     @media (min-width: 400px) and (max-width: 571px){
         .video-preview{
             width: 100%;
             height: 300px;
+        }
+        .input{
+            width: 100%;
         }
     }
     @media (min-width: 572px) and (max-width: 798px){
@@ -39,11 +46,17 @@
             width: 100%;
             height: 350px;
         }
+        .input{
+            width: 100%;
+        }
     }
     @media (min-width: 799px) and (max-width: 900px){
         .video-preview{
             width: 100%;
             height: 400px;
+        }
+        .input{
+            width: 100%;
         }
     }
     @media (min-width: 901px) and (max-width: 991px){
@@ -93,7 +106,7 @@
                         <h1>Youtube Plugin Inputan</h1>
                         <div id="video-preview"></div>
                         <div class="card-body">
-                            <input class="form-control" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="width: 250px; background-color: var(--bs-primary-border-subtle)">
+                            <input class="form-control input" type="text" id="input" placeholder="Masukkan URL ID Youtube" style="background-color: var(--bs-primary-border-subtle)">
                             <!-- <button id="sumbit" class="btn"><i class="bi bi-arrow-return-left"></i></button>
                             <button class="btn btn-close" id="btnclear"></button> -->
                             <button class="mt-3 btn btn-primary" id="qrcode">Download QR Code</button>
@@ -109,8 +122,9 @@
                     </div>
                 </div>
                 <div class="mt-3 mx-3">
-                    <button type="button" class="btn btn-primary" id="toast1" onclick="myscreenshot()">Screenshot</button>
+                    <button type="button" class="btn btn-primary" id="toast1" onclick="myscreenshot()"><img class="" src="img/screenshot.png" width="20px" alt="">&nbsp;Screenshot</button>
                     <a href="File/Cara Menggunakan Website Plugin Youtube Inputan.pdf" class="btn btn-primary" target="_blank">Bantuan</a>
+                    <!-- <button type="button" class="btn btn-primary" href="File/Cara Menggunakan Website Plugin Youtube Inputan.pdf" target="_blank">Bantuan</button> -->
                 </div>
                 <!-- <iframe src="file/Cara Menggunakan Website Plugin Youtube Inputan.docx" width="300" height="400"></iframe> -->
             </div>
