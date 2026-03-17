@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Courgette&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+    />
+    <title>Youtube Plugin Input</title>
+    <style>
+      :root {
+        --card-radius: 24px;
+        --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+      }
+
+      body {
+        background: radial-gradient(circle at top right, #f8fafc, #f1f5f9);
+        font-family: 'Outfit', sans-serif;
+        min-height: 100vh;
+        color: #1e293b;
+      }
+
+      [data-bs-theme="dark"] body {
+        background: radial-gradient(circle at top right, #0f172a, #020617);
+        color: #f1f5f9;
+      }
+
+      a {
+        text-decoration: none;
+        color: #ef4444;
+        font-family: "Courgette", cursive;
+        transition: var(--transition);
+      }
+
+      a:hover {
+        opacity: 0.8;
+      }
+
+      /* ── Navbar ── */
+      .navbar {
+        background: rgba(255, 255, 255, 0.7);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      [data-bs-theme="dark"] .navbar {
+        background: rgba(15, 23, 42, 0.7);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      }
+
+      .navbar-brand {
+        font-family: "Courgette", cursive;
+        font-size: 1.5rem;
+        background: linear-gradient(to right, #ef4444, #f87171);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      /* ── Main Card ── */
+      .main-card {
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: var(--card-radius);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+        padding: 2.5rem;
+        transition: var(--transition);
+      }
+
+      [data-bs-theme="dark"] .main-card {
+        background: rgba(30, 41, 59, 0.6);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      .main-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.08);
+      }
+
+      .main-card h1 {
+        font-family: "Courgette", cursive;
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        background: linear-gradient(to right, #1e293b, #64748b);
+        -webkit-background-clip: text;
+        background-clip: text;
+        -webkit-text-fill-color: transparent;
+      }
+
+      [data-bs-theme="dark"] .main-card h1 {
+        background: linear-gradient(to right, #f1f5f9, #94a3b8);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      /* ── Video Wrapper ── */
+      .video-wrapper {
+        width: 100%;
+        border-radius: 16px;
+        overflow: hidden;
+        background: #000;
+        margin-bottom: 1.75rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+      }
+
+      .video-placeholder {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 4rem 1rem;
+        color: #94a3b8;
+        background: #f8fafc;
+        font-size: 1rem;
+        gap: 0.75rem;
+      }
+
+      [data-bs-theme="dark"] .video-placeholder {
+        background: #0f172a;
+        color: #475569;
+      }
+
+      .video-wrapper iframe {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        display: block;
+        border: none;
+      }
+
+      /* ── Textarea ── */
+      .youtube-input {
+        width: 100%;
+        min-height: 56px;
+        max-height: 150px;
+        resize: none;
+        padding: 14px 20px;
+        border: 2px solid #e2e8f0;
+        border-radius: 16px;
+        background-color: #fff;
+        color: #1e293b;
+        font-size: 1rem;
+        line-height: 1.6;
+        outline: none;
+        transition: var(--transition);
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+      }
+
+      [data-bs-theme="dark"] .youtube-input {
+        background-color: #020617;
+        border-color: #334155;
+        color: #f1f5f9;
+      }
+
+      .youtube-input:focus {
+        border-color: #6366f1;
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.15);
+      }
+
+      .hint-text {
+        font-size: 0.85rem;
+        color: #64748b;
+        margin-top: 0.6rem;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+      }
+
+      /* ── Action Buttons ── */
+      .action-buttons {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+      }
+
+      @media (max-width: 576px) {
+        .action-buttons {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .btn {
+        border-radius: 14px;
+        padding: 0.75rem 1.25rem;
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        transition: var(--transition);
+      }
+
+      .btn-primary {
+        background: var(--primary-gradient);
+        border: none;
+        box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
+      }
+
+      .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(99, 102, 241, 0.4);
+        opacity: 0.9;
+      }
+
+      .btn-outline-primary {
+        border-width: 2px;
+      }
+
+      /* ── Link Result Box ── */
+      .link-result-box {
+        background: #f1f5f9;
+        border: 1px solid #e2e8f0;
+        border-radius: 14px;
+        padding: 1rem 1.25rem;
+        margin-top: 1.5rem;
+        font-size: 0.95rem;
+        word-break: break-all;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: var(--transition);
+      }
+
+      [data-bs-theme="dark"] .link-result-box {
+        background: rgba(15, 23, 42, 0.4);
+        border-color: #334155;
+      }
+
+      .link-result-box.empty {
+        opacity: 0.5;
+        filter: grayscale(1);
+      }
+
+      .link-result-box .label {
+        font-weight: 700;
+        color: #475569;
+        text-transform: uppercase;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+      }
+
+      /* ── Bottom Bar ── */
+      .bottom-bar {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        margin-bottom: 3rem;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg">
+      <div class="container">
+        <span class="navbar-brand fw-bold">
+          <i class="bi bi-youtube text-danger me-1"></i>YT Plugin
+        </span>
+        <ul class="nav ms-auto">
+          <li class="nav-item dropdown">
+            <button
+              class="btn nav-link dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              data-bs-reference="parent"
+              aria-label="Ganti tema"
+            >
+              <i
+                class="bi bi-sun-fill theme-icon-active"
+                data-theme-icon-active="bi-sun-fill"
+              ></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li>
+                <button
+                  class="dropdown-item d-flex align-items-center"
+                  type="button"
+                  data-bs-theme-value="light"
+                >
+                  <i
+                    class="bi bi-sun-fill me-2 opacity-50"
+                    data-theme-icon="bi-sun-fill"
+                  ></i
+                  >Light
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item d-flex align-items-center"
+                  type="button"
+                  data-bs-theme-value="dark"
+                >
+                  <i
+                    class="bi bi-moon-fill me-2 opacity-50"
+                    data-theme-icon="bi-moon-fill"
+                  ></i
+                  >Dark
+                </button>
+              </li>
+              <li>
+                <button
+                  class="dropdown-item d-flex align-items-center"
+                  type="button"
+                  data-bs-theme-value="auto"
+                >
+                  <i
+                    class="bi bi-circle-half me-2 opacity-50"
+                    data-theme-icon="bi-circle-half"
+                  ></i
+                  >Auto
+                </button>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="mt-4 container">
+      <div class="row justify-content-center">
+        <div class="col-lg-7 col-md-9">
+          <!-- Card (id="content" untuk screenshot) -->
+          <div
+            class="main-card animate__animated animate__fadeInUp"
+            id="content"
+          >
+            <h1>
+              <i class="bi bi-youtube text-danger me-2"></i>Youtube Plugin
+              Inputan
+            </h1>
+
+            <!-- Video Wrapper -->
+            <div class="video-wrapper" id="video-wrapper">
+              <div class="video-placeholder" id="video-placeholder">
+                <i
+                  class="bi bi-play-circle"
+                  style="font-size: 2.5rem; opacity: 0.4"
+                ></i>
+                <span>Preview video akan muncul di sini</span>
+              </div>
+              <div id="video-preview"></div>
+            </div>
+
+            <!-- Input -->
+            <div class="mb-1">
+              <label class="form-label fw-semibold mb-1" for="input">
+                <i class="bi bi-link-45deg me-1"></i>ID / URL YouTube:
+              </label>
+              <textarea
+                class="youtube-input"
+                id="input"
+                placeholder="Contoh: dQw4w9WgXcQ  atau  https://youtu.be/dQw4w9WgXcQ"
+                autocomplete="off"
+                spellcheck="false"
+              ></textarea>
+              <p class="hint-text">
+                <i class="bi bi-info-circle me-1"></i>
+                Mendukung: Video ID, youtube.com/watch?v=, youtu.be/,
+                youtube.com/shorts/
+              </p>
+            </div>
+
+            <!-- Buttons -->
+            <div class="action-buttons">
+              <button class="btn btn-primary" id="btn-qr">
+                <span
+                  class="spinner-border spinner-border-sm d-none"
+                  id="qr-spinner"
+                ></span>
+                <i class="bi bi-qr-code-scan" id="qr-icon"></i>
+                Download QR Code
+              </button>
+              <button class="btn btn-outline-secondary" id="btn-clear">
+                <i class="bi bi-trash3"></i> Clear
+              </button>
+              <button class="btn btn-outline-primary d-none" id="btn-copy">
+                <i class="bi bi-clipboard"></i> Salin Link
+              </button>
+            </div>
+
+            <!-- Link Result -->
+            <div class="link-result-box empty" id="result-box">
+              <span class="label">Link:</span>
+              <span id="result">—</span>
+            </div>
+          </div>
+          <!-- /Card -->
+
+          <!-- Bottom Bar -->
+          <div class="bottom-bar">
+            <button class="btn btn-primary" id="btn-screenshot">
+              <i class="bi bi-camera"></i> Screenshot
+            </button>
+            <a
+              href="File/Cara Menggunakan Website Plugin Youtube Inputan.pdf"
+              class="btn btn-outline-primary"
+              target="_blank"
+            >
+              <i class="bi bi-question-circle"></i> Bantuan
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── Screenshot Modal ── -->
+    <div
+      class="modal fade"
+      id="screenshot-modal"
+      tabindex="-1"
+      aria-labelledby="screenshotModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="screenshotModalLabel">
+              <i class="bi bi-camera me-2"></i>Screenshot Preview
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div
+            class="modal-body"
+            style="background: #111; text-align: center; padding: 1rem"
+          >
+            <img
+              id="screenshot-img"
+              src=""
+              alt="Screenshot"
+              style="max-width: 100%; border-radius: 6px"
+            />
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Tutup
+            </button>
+            <button
+              type="button"
+              class="btn btn-success"
+              id="btn-download-screenshot"
+            >
+              <i class="bi bi-download me-1"></i>Download PNG
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="dark-mode.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+      integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+    <script src="js/html2canvas.min.js"></script>
+    <script src="javascript.js"></script>
+  </body>
+</html>

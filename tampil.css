@@ -1,86 +1,55 @@
-@media (max-width: 474px) {
-  .video-preview {
-    width: 50%;
-    height: 50px;
-  }
-
-  .input {
-    width: 100%;
-  }
-}
-/* Extra small devices (portrait phones, less than 576px) */
-@media (max-width: 575px) {
-  .video-preview {
-    width: 100%;
-    height: 280px;
-  }
-
-  .input {
-    width: 100%;
-  }
-}
-/*>=475px & <=532px */
-@media (min-width: 475px) and (max-width: 532px) {
-  .video-preview {
-    width: 100%;
-    height: 250px;
-  }
-
-  .input {
-    width: 100%;
-  }
+/* ── Video Preview iframe ── */
+.video-preview {
+  width: 100%;
+  display: block;
+  border: none;
 }
 
-/* Small devices (landscape phones, 576px and up) */
-@media (min-width: 576px) and (max-width: 767px) {
-  .video-preview {
-    width: 100%;
-    height: 250px;
-  }
-
-  .input {
-    width: 100%;
-  }
+/* ── Responsive iframe height ──
+   Menggunakan aspect-ratio lebih modern & konsisten
+   daripada mendefinisikan height per breakpoint.        */
+.video-wrapper iframe.video-preview {
+  aspect-ratio: 16 / 9;
+  height: auto;
+  min-height: 180px;
 }
 
-/* Medium devices (tablets, 768px and up) */
-@media (min-width: 767px) and (max-width: 991px) {
-  .video-preview {
-    width: 100%;
-    height: 350px;
+/* Fallback untuk browser lama yang belum support aspect-ratio */
+@supports not (aspect-ratio: 16 / 9) {
+  /* xs – <576px */
+  @media (max-width: 575.98px) {
+    .video-wrapper iframe.video-preview {
+      height: 200px;
+    }
   }
-
-  .input {
-    width: 100%;
+  /* sm – 576px … 767px */
+  @media (min-width: 576px) and (max-width: 767.98px) {
+    .video-wrapper iframe.video-preview {
+      height: 250px;
+    }
   }
-}
-
-/* Large devices (desktops, 992px and up) */
-@media (min-width: 992px) {
-  .video-preview {
-    width: 100%;
-    height: 250px;
+  /* md – 768px … 991px */
+  @media (min-width: 768px) and (max-width: 991.98px) {
+    .video-wrapper iframe.video-preview {
+      height: 320px;
+    }
   }
-
-  .input {
-    width: 100%;
+  /* lg – 992px … 1199px */
+  @media (min-width: 992px) and (max-width: 1199.98px) {
+    .video-wrapper iframe.video-preview {
+      height: 300px;
+    }
   }
-}
-@media (min-width: 1200px) {
-  .video-preview {
-    width: 100%;
-    height: 300px;
+  /* xl – 1200px … 1399px */
+  @media (min-width: 1200px) and (max-width: 1399.98px) {
+    .video-wrapper iframe.video-preview {
+      height: 340px;
+    }
   }
-  .input {
-    width: 100%;
-  }
-}
-@media (min-width: 1400px) {
-  .video-preview {
-    width: 100%;
-    height: 350px;
-  }
-  .input {
-    width: 100%;
+  /* xxl – ≥1400px */
+  @media (min-width: 1400px) {
+    .video-wrapper iframe.video-preview {
+      height: 380px;
+    }
   }
 }
